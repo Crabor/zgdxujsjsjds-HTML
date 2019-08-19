@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>移动手机Material Design风格信息卡片UI设计|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<!--[if IE]>
+		<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="js/cards.js"></script>
+	<script type="text/javascript">
+		function getting()
+		{
+			//接收表单的URL地址
+			var url = "https://easy-mock.com/mock/5cd50e5885963f32c1836096/example/test";
+
+			var ajax = false;
+			//开始初始化XMLHttpRequest对象
+			if(window.XMLHttpRequest)
+			{   //Mozilla 浏览器
+				ajax = new XMLHttpRequest();
+				if (ajax.overrideMimeType)
+				{   //设置MiME类别
+					ajax.overrideMimeType("text/xml");
+				}
+			}
+			else if (window.ActiveXObject)
+			{   // IE浏览器
+				try
+				{
+					ajax = new ActiveXObject("Msxml2.XMLHTTP");
+				}
+				catch (e)
+				{
+					try
+					{
+						ajax = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					catch (e) {}
+				}
+			}
+			if (!ajax)
+			{   // 异常，创建对象实例失败
+				window.alert("不能创建XMLHttpRequest对象实例.");
+				return false;
+			}
+
+			//通过Get方式打开连接
+			ajax.open("GET", url, true);
+			//发送Get数据
+			ajax.send();
+
+			//获取执行状态
+			ajax.onreadystatechange = function()
+			{
+				//如果执行状态成功，那么就把返回信息写到指定的层里
+				if (ajax.readyState == 4 && ajax.status == 200)
+				{
+					if(item==0){
+						//更新温度
+						//data[0].num=JSON.parse(ajax.responseText)["temp"];
+						document.getElementById("card__full-num").innerText="历史温度值： "+data[0].num+" ℃";
+						//是否展开选项
+						if(JSON.parse(ajax.responseText)["running"]){
+							document.getElementById("card__full-num1").innerText="设备已上线";
+							if(openTime){
+								let mydiv = document.getElementById("mydiv");
+								let  re = /(?<!-)\bactive\b(?!-)/;
+								if( !re.test(mydiv.className) ){
+									document.getElementById("blue").click();
+									openTime--;
+								}
+							}
+						}else{
+							document.getElementById("card__full-num1").innerText="设备离线中";
+						}
+					}
+				}
+			}
+		}
+		function doUpdate()
+		{
+			getting();
+			window.setTimeout("doUpdate()", 2000);
+		}
+		doUpdate();
+	</script>
+</head>
+<body>
+	<div class="view">
+		<div id="mydiv" class="card__full">
+			<div class="card__full-top">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M16.59 8.59l-4.59 4.58-4.59-4.58-1.41 1.41 6 6 6-6z"/>
+						<path d="M0 0h24v24h-24z" fill="none"/>
+				</svg>
+				<span id="card__full-num"  class="card__full-num"></span>
+				<br/>
+				<span id="card__full-num1" class="card__full-num1">设备离线中</span>
+			</div>
+			<div class="card__full-bottom">
+				<p class="card__full-handle"></p>
+				<p class="card__full-info"></p>
+			</div>
+		</div>
+		<ul class="card__list">
+			<li id="blue" class="card__item card__item--blue">
+				<div class="card__info">
+					<div class="info-player">
+<!--						<p class="info-player__num">9</p>-->
+						<img class="info-player__img" src="assets/Cobble鹅卵石.png"/>
+						<p class="info-player__name"><small>Cobble鹅卵石</small><br>崔玺萌</p>
+					</div>
+					<div class="info-place">1<sup>st</sup></div>
+				</div>
+			</li>
+			<li class="card__item card__item--purple">
+				<div class="card__info">
+					<div class="info-player">
+<!--						<p class="info-player__num">18</p>-->
+						<img class="info-player__img" src="assets/Astra启明星.png"/>
+						<p class="info-player__name"><small>Astra启明星</small><br>杨嵘</p>
+					</div>
+					<div class="info-place">2<sup>nd</sup></div>
+				</div>
+			</li>
+<!--			<li class="card__item card__item&#45;&#45;green">-->
+<!--				<div class="card__info">-->
+<!--					<div class="info-player">-->
+<!--						<p class="info-player__num">12</p>-->
+<!--						<p class="info-player__name"><small>Aaron</small><br>Rogers</p>-->
+<!--					</div>-->
+<!--					<div class="info-place">3<sup>rd</sup></div>-->
+<!--				</div>-->
+<!--			</li>-->
+<!--			<li class="card__item card__item&#45;&#45;yellow">-->
+<!--				<div class="card__info">-->
+<!--					<div class="info-player">-->
+<!--						<p class="info-player__num">7</p>-->
+<!--						<p class="info-player__name"><small>Ben</small><br>Roethlisberger</p>-->
+<!--					</div>-->
+<!--					<div class="info-place">4<sup>th</sup></div>-->
+<!--				</div>-->
+<!--			</li>-->
+<!--			<li class="card__item card__item&#45;&#45;tan">-->
+<!--				<div class="card__info">-->
+<!--					<div class="info-player">-->
+<!--						<p class="info-player__num">9</p>-->
+<!--						<p class="info-player__name"><small>Drew</small><br>Brees</p>-->
+<!--					</div>-->
+<!--					<div class="info-place">5<sup>th</sup></div>-->
+<!--				</div>-->
+<!--			</li>-->
+<!--			<li class="card__item card__item&#45;&#45;orange">-->
+<!--				<div class="card__info">-->
+<!--					<div class="info-player">-->
+<!--						<p class="info-player__num">18</p>-->
+<!--						<p class="info-player__name"><small>Peyton</small><br>Manning</p>-->
+<!--					</div>-->
+<!--					<div class="info-place">6<sup>th</sup></div>-->
+<!--				</div>-->
+<!--			</li>-->
+		</ul>
+	</div>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+	<script src="js/cards.js"></script>
+</body>
+</html>
